@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script>
+    //持续读取
+    window.setInterval(function(){
+        $.ajax(
+            {
+            url:"api/values",
+            type:"get",
+            dataType:"Json",
+            success:function(res){
+                console.log(res)
+                $("#r_value").html(res);
+            }
+        })
+    },1000);
+</script>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <h5>湿度显示：</h5>
+    <div>
+        <div id="r_value" ></div>
+    </div>
+
+    <h5>写入转速：</h5>
+    <form action="api/values" method="post" target="mi">
+        <input id="w_value" name="value" />
+        <input type="submit" />
+    </form>
+    <iframe name="mi" width="0" height="0"></iframe>
+</div>
